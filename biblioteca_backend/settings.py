@@ -11,16 +11,16 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
-import dj_database_url
+from decouple import config
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-SECRET_KEY = 'django-insecure-=ck7h()^m(!s=#%&ms72wqeru$2&r@&4rw_nr5+ol!80bt=1v@'
+SECRET_KEY = config('SECRET_KEY')
 
-DEBUG = True
+DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='').split(',')
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -69,9 +69,14 @@ TEMPLATES = [
 WSGI_APPLICATION = 'biblioteca_backend.wsgi.application'
 
 DATABASES = {
-    'default': dj_database_url.parse(
-        "postgresql://admin:me7Q9YJvXil4Mpz9WYwKPPquJ3f0SWKi@dpg-ct34ql8gph6c73bpr160-a.oregon-postgres.render.com/jar_128i"
-    )
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': config('DB_NAME'),
+        'USER': config('DB_USER'),
+        'PASSWORD': config('DB_PASSWORD'),
+        'HOST': config('DB_HOST'),
+        'PORT': config('DB_PORT', cast=int),
+    }
 }
 
 AUTH_PASSWORD_VALIDATORS = [
