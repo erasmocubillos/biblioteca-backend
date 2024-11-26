@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+import dj_database_url
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -68,10 +69,9 @@ TEMPLATES = [
 WSGI_APPLICATION = 'biblioteca_backend.wsgi.application'
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': dj_database_url.parse(
+        "postgresql://admin:me7Q9YJvXil4Mpz9WYwKPPquJ3f0SWKi@dpg-ct34ql8gph6c73bpr160-a.oregon-postgres.render.com/jar_128i"
+    )
 }
 
 AUTH_PASSWORD_VALIDATORS = [
