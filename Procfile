@@ -1,0 +1,1 @@
+web: gunicorn biblioteca_backend.wsgi:application --log-file -
