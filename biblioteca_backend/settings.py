@@ -20,8 +20,6 @@ SECRET_KEY = config('SECRET_KEY')
 
 DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='').split(',')
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -119,7 +117,6 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.TokenAuthentication',
     ],
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.IsAuthenticated',
         'rest_framework.permissions.AllowAny',
     ],
 }
@@ -148,19 +145,18 @@ CORS_ALLOWED_ORIGINS = [
     "https://biblioteca-backend-ioam.onrender.com",
     "https://craliceojar.vercel.app",
 ]
-
 CORS_ALLOW_CREDENTIALS = True
 
 CSRF_TRUSTED_ORIGINS = [
     "https://biblioteca-backend-ioam.onrender.com",
-    "https://biblioteca-backend-ioam.onrender.com:10000",
     "https://craliceojar.vercel.app",
 ]
 
-SECURE_SSL_REDIRECT = True
+CORS_ALLOW_ALL_ORIGINS = True
+
+SECURE_SSL_REDIRECT = False
 SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
-
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 ALLOWED_HOSTS = [
