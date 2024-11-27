@@ -4,6 +4,8 @@ from rest_framework.parsers import MultiPartParser
 from rest_framework.response import Response
 from rest_framework import status
 
+from django.contrib.auth.models import User
+from django.http import JsonResponse
 from django.core.mail import send_mail
 
 from .models import Categoria, Libro
@@ -65,3 +67,10 @@ class EnviarRespuestasView(APIView):
             return Response({"message": "Respuestas enviadas correctamente."}, status=status.HTTP_200_OK)
         except Exception as e:
             return Response({"error": f"Error al enviar el correo: {str(e)}"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        
+        
+def create_superuser(request):
+    if not User.objects.filter(username="admin").exists():
+        User.objects.create_superuser("admin", "admin@example.com", "securepassword")
+        return JsonResponse({"message": "Superusuario creado exitosamente."})
+    return JsonResponse({"message": "El superusuario ya existe."})
