@@ -126,8 +126,6 @@ REST_FRAMEWORK = {
 
 X_FRAME_OPTIONS = "SAMEORIGIN"
 
-CORS_ALLOW_ALL_ORIGINS = True
-
 CORS_ALLOW_METHODS = [
     "GET",
     "POST",
@@ -146,7 +144,15 @@ CORS_ALLOW_HEADERS = [
     "user-agent",
 ]
 
+CORS_ALLOWED_ORIGINS = [
+    "https://biblioteca-backend-ioam.onrender.com",
+    "https://craliceojar.vercel.app",
+]
+
+CORS_ALLOW_CREDENTIALS = True
+
 CSRF_TRUSTED_ORIGINS = [
+    "https://biblioteca-backend-ioam.onrender.com",
     "https://craliceojar.vercel.app",
 ]
 
