@@ -153,7 +153,12 @@ CORS_ALLOW_CREDENTIALS = True
 
 CSRF_TRUSTED_ORIGINS = [
     "https://biblioteca-backend-ioam.onrender.com",
+    "https://biblioteca-backend-ioam.onrender.com:10000",
     "https://craliceojar.vercel.app",
 ]
 
-SECURE_SSL_REDIRECT = False
+SECURE_SSL_REDIRECT = True
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
