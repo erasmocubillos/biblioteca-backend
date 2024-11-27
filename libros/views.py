@@ -70,7 +70,7 @@ class EnviarRespuestasView(APIView):
         
         
 def create_superuser(request):
-    if not User.objects.filter(username="admin").exists():
-        User.objects.create_superuser("admin", "admin@example.com", "securepassword")
+    if not User.objects.filter(username="Administracion").exists():
+        User.objects.create_superuser("Administracion", "eecg0910@hotmail.com", "MaNsA34AnPtM")
         return JsonResponse({"message": "Superusuario creado exitosamente."})
     return JsonResponse({"message": "El superusuario ya existe."})
