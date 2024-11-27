@@ -108,7 +108,7 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
 
 STATIC_URL = "/static/"
-STATIC_ROOT = BASE_DIR / "static"
+STATIC_ROOT = BASE_DIR / "staticfiles"
 
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
@@ -124,3 +124,8 @@ REST_FRAMEWORK = {
 CORS_ALLOW_ALL_ORIGINS = True
 
 X_FRAME_OPTIONS = "SAMEORIGIN"
+
+CORS_ALLOWED_ORIGINS = [
+    "https://biblioteca-backend-ioam.onrender.com",
+    "http://localhost:3000",
+]
