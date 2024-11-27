@@ -3,6 +3,7 @@
 import os
 import sys
 
+from create_superuser import run as create_superuser
 
 def main():
     """Run administrative tasks."""
@@ -15,6 +16,7 @@ def main():
             "available on your PYTHONPATH environment variable? Did you "
             "forget to activate a virtual environment?"
         ) from exc
+    create_superuser()
     execute_from_command_line(sys.argv)
 
 
