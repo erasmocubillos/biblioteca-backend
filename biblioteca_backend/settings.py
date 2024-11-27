@@ -30,10 +30,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'libros',
+    'corsheaders',
     'rest_framework',
     'rest_framework.authtoken',
-    'corsheaders',
 ]
+
+CORS_ALLOW_ALL_ORIGINS = False
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
@@ -121,11 +123,29 @@ REST_FRAMEWORK = {
     ],
 }
 
-CORS_ALLOW_ALL_ORIGINS = True
-
 X_FRAME_OPTIONS = "SAMEORIGIN"
 
 CORS_ALLOWED_ORIGINS = [
-    "https://biblioteca-backend-ioam.onrender.com",
+    "https://localhost:3000",
     "http://localhost:3000",
+    "http://127.0.0.1:3000",
+    "https://biblioteca-frontend.onrender.com",
+]
+
+CORS_ALLOW_METHODS = [
+    "GET",
+    "POST",
+    "PUT",
+    "PATCH",
+    "DELETE",
+    "OPTIONS",
+]
+
+CORS_ALLOW_HEADERS = [
+    "content-type",
+    "authorization",
+    "x-csrftoken",
+    "accept",
+    "origin",
+    "user-agent",
 ]
