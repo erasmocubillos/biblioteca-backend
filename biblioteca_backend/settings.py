@@ -126,12 +126,7 @@ REST_FRAMEWORK = {
 
 X_FRAME_OPTIONS = "SAMEORIGIN"
 
-CORS_ALLOWED_ORIGINS = [
-    "https://localhost:3000",
-    "http://localhost:3000",
-    "http://127.0.0.1:3000",
-    "https://craliceojar.vercel.app",
-]
+CORS_ALLOW_ALL_ORIGINS = True
 
 CORS_ALLOW_METHODS = [
     "GET",
@@ -150,3 +145,9 @@ CORS_ALLOW_HEADERS = [
     "origin",
     "user-agent",
 ]
+
+CSRF_TRUSTED_ORIGINS = [
+    "https://craliceojar.vercel.app",
+]
+
+SECURE_SSL_REDIRECT = False
