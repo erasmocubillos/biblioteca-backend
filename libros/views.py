@@ -23,6 +23,9 @@ class LibroListView(generics.ListAPIView):
         if categoria_id:
             queryset = queryset.filter(categoria_id=categoria_id)
         return queryset
+    
+    def get_serializer_context(self):
+        return {'request': self.request}
 
 
 class LibroUploadView(APIView):

@@ -27,5 +27,4 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('libros.urls')),
     path('api/token/', obtain_auth_token, name='obtain-token'),
-    path('media/<path:path>', serve_pdf),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

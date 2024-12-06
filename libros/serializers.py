@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from rest_framework.fields import SerializerMethodField
 from .models import Categoria, Libro
 
 
@@ -9,7 +10,7 @@ class CategoriaSerializer(serializers.ModelSerializer):
 
 
 class LibroSerializer(serializers.ModelSerializer):
-    archivo_pdf = serializers.FileField()
+    archivo_pdf = SerializerMethodField()
 
     class Meta:
         model = Libro
@@ -34,3 +35,9 @@ class LibroSerializer(serializers.ModelSerializer):
         
         instance.save()
         return instance
+    
+    def get_archivo_pdf(self, obj):
+        request = self.context.get('request')
+        if request:
+            return request.build_absolute_uri(obj.archivo_pdf.url)
+        return obj.archivo_pdf.url
