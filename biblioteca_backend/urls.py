@@ -17,7 +17,9 @@ def serve_pdf(request, path):
 
     with open(file_path, 'rb') as pdf:
         response = HttpResponse(pdf.read(), content_type='application/pdf')
-        response['Content-Disposition'] = f'inline; filename="{path}"'
+        response["Access-Control-Allow-Origin"] = "*"
+        response["Access-Control-Allow-Methods"] = "GET"
+        response["Access-Control-Allow-Headers"] = "Content-Type, Authorization"
         return response
 
 urlpatterns = [
