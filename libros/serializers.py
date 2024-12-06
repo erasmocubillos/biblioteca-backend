@@ -17,6 +17,10 @@ class LibroSerializer(serializers.ModelSerializer):
         fields = ['id', 'titulo', 'autor', 'categoria', 'archivo_pdf', 'preguntas','fecha_subida']
     
     def create(self, validated_data):
+        archivo_pdf = validated_data.get('archivo_pdf')
+        if not archivo_pdf:
+            raise serializers.ValidationError({"archivo_pdf": "El archivo PDF es requerido."})
+
         preguntas = validated_data.pop('preguntas', [])
         libro = Libro.objects.create(**validated_data)
         libro.preguntas = preguntas

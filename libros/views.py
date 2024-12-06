@@ -34,14 +34,18 @@ class LibroUploadView(APIView):
     parser_classes = [MultiPartParser]
 
     def post(self, request, *args, **kwargs):
-        serializer = LibroSerializer(data=request.data)
-        if serializer.is_valid():
-            libro = serializer.save()
-            logger.info(f'Archivo subido: {libro.archivo_pdf.path}')
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        
-        logger.error(f"Errores al subir archivo: {serializer.errors}")
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        try:
+            serializer = LibroSerializer(data=request.data)
+            if serializer.is_valid():
+                libro = serializer.save()
+                logger.info(f"Archivo subido correctamente: {libro.archivo_pdf.path}")
+                return Response(serializer.data, status=status.HTTP_201_CREATED)
+            else:
+                logger.error(f"Errores de validación: {serializer.errors}")
+                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        except Exception as e:
+            logger.exception("Error en la subida del archivo")
+            return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
 class LibroDetailView(generics.RetrieveAPIView):
