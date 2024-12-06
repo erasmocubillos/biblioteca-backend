@@ -12,7 +12,7 @@ def root_view(request):
 
 def serve_pdf(request, path):
     file_path = os.path.join(settings.MEDIA_ROOT, path)
-    if not os.path.join(file_path):
+    if not os.path.exists(file_path):
         raise Http404("El archivo solicitado no existe.")
 
     with open(file_path, 'rb') as pdf:
