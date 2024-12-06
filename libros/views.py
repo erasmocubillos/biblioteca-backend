@@ -5,9 +5,11 @@ from rest_framework.response import Response
 from rest_framework import status
 
 from django.core.mail import send_mail
-
+import logging
 from .models import Categoria, Libro
 from .serializers import CategoriaSerializer, LibroSerializer
+
+logger = logging.getLogger(__name__)
 
 class CategoriaListCreateView(generics.ListCreateAPIView):
     queryset = Categoria.objects.all()
@@ -34,8 +36,11 @@ class LibroUploadView(APIView):
     def post(self, request, *args, **kwargs):
         serializer = LibroSerializer(data=request.data)
         if serializer.is_valid():
-            serializer.save()
+            libro = serializer.save()
+            logger.info(f'Archivo subido: {libro.archivo_pdf.path}')
             return Response(serializer.data, status=status.HTTP_201_CREATED)
+        
+        logger.error(f"Errores al subir archivo: {serializer.errors}")
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
